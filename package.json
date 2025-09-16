@@ -1,0 +1,26 @@
+{
+  "name": "freelance-platform-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace @app/backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build:backend": "npm run build --workspace @app/backend",
+    "start:backend": "npm run start --workspace @app/backend",
+    "dev": "concurrently \"npm:dev:backend\" \"npm:dev:frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dev-Karena/Freelance-Software-Project-Bidding-Management-System.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Dev-Karena/Freelance-Software-Project-Bidding-Management-System#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
