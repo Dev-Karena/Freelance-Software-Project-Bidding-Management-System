@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:6
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=devarena
+    command: ["--replSet", "rs0"]
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: .
+    depends_on: [mongo]
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/devarena
+      - JWT_SECRET=devsecret
+      - STRIPE_SECRET_KEY=sk_test_...
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    command: ["npm", "run", "dev"]
+
+volumes:
+  mongo-data:
